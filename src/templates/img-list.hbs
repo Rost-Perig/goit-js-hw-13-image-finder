@@ -1,0 +1,32 @@
+{{#each this}}
+<li id="{{id}}" class="img-list-item">
+    <a href="{{largeImageURL}}" class="img-list-link">
+            <img src="{{webformatURL}}" alt="tags: {{tags}}" class="main-img" />
+    </a>
+    <div class="stats">
+        <p class="stats-item">
+            <i class="material-icons icon--op">thumb_up</i>
+            likes: {{likes}}
+            
+        </p>
+        <p class="stats-item">
+            <i class="material-icons icon--op">visibility</i>
+            views: {{views}}
+        </p>
+        <p class="stats-item">
+            <i class="material-icons icon--op">comment</i>
+            comments: {{comments}}
+        </p>
+        <p class="stats-item">
+            <i class="material-icons icon--op">cloud_download</i>
+            downloads: {{downloads}}
+        </p>
+        <a href="{{pageURL}}" class="stats-item home-page-link" target="_blank">
+            <i class="material-icons icon--op">home</i>
+            home page
+        </a>
+    </div> 
+    
+</li>
+{{/each}}
+
