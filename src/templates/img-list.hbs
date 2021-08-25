@@ -1,13 +1,12 @@
 {{#each this}}
-<li id="{{id}}" class="img-list-item">
-    <a href="{{largeImageURL}}" class="img-list-link">
+<li id="{{id}}" class="img-list-item" data-url="{{largeImageURL}}">
+    <a href="javascript:void(0)" class="img-list-link">
             <img src="{{webformatURL}}" alt="tags: {{tags}}" class="main-img" />
     </a>
     <div class="stats">
         <p class="stats-item">
             <i class="material-icons icon--op">thumb_up</i>
-            likes: {{likes}}
-            
+            likes: {{likes}}   
         </p>
         <p class="stats-item">
             <i class="material-icons icon--op">visibility</i>
@@ -25,8 +24,7 @@
             <i class="material-icons icon--op">home</i>
             home page
         </a>
-    </div> 
-    
+    </div>    
 </li>
 {{/each}}
 

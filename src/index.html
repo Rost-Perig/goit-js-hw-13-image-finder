@@ -11,7 +11,7 @@
   </head>
   <body>
 
-    <h3 class="title">HW-13: picture of exgibition</h3>
+    <h3 class="title">HW-13: picture of exhibition</h3>
 
     <section class="search-section">
       <form class="search-form" id="search-form">
@@ -32,25 +32,30 @@
         </button>
       </form>
       <div class="option-box">
-        <h5 class="option-title">Choose options:</h5>
+        <h5 class="option-title">Choice options:</h5>
         <form class="option-form js-orientation">
-          <p class="option-text">Choose orientation of image:</p>
-          <label>
+          <p class="option-text">Choice orientation of image:</p>
+          <div class="choice-option">
+           <label>
             <input type="radio" name="orientation" value="all" checked />
             all (default)
           </label>
           <label>
             <input type="radio" name="orientation" value="horizontal" />
             horizontal
-          </label>
-          <label>
+          </label> 
+          </div>
+          <div class="choice-option">
+           <label>
             <input type="radio" name="orientation" value="vertical" />
             vertical
-          </label>
+          </label> 
+          </div>
         </form>
         <form class="option-form js-img-type">
-          <p class="option-text">Choose image type:</p>
-          <label>
+          <p class="option-text">Choice image type:</p>
+          <div class="choice-option">
+            <label>
             <input type="radio" name="image-type" value="all" checked />
             all (default)
           </label>
@@ -58,17 +63,21 @@
             <input type="radio" name="image-type" value="photo" />
             photo
           </label>
-          <label>
+          </div>
+          <div class="choice-option">
+            <label>
             <input type="radio" name="image-type" value="illustration" />
             illustration
           </label>
             <input type="radio" name="image-type" value="vector" />
             vector
           </label>
+          </div>  
         </form>
         <form class="option-form js-infinite-scroll">
           <p class="option-text">Infinite scrolling:</p>
-          <label>
+          <div class="choice-option">
+            <label>
             <input type="radio" name="infinite-scroll" value="on" />
             on
           </label>
@@ -76,19 +85,16 @@
             <input type="radio" name="infinite-scroll" value="off" checked />
             off (default)
           </label>
+          </div>
         </form>
       </div>
-
     </section>
-
-    <section class="result-section">
-      
+    <section class="result-section">  
       <div class="result-container js-result-container">
         <ul id="unless-scroll" class="img-list">
           <!-- Список <li> с карточками изображений -->
         </ul>
       </div>
-
       <button type="button" class="form-el btn btn-more " data-action="load-more">
         <span class="spinner-border spinner-border-sm spinner is-hidden" role="status" aria-hidden="true"></span>
         <span class="label">more</span>
@@ -98,9 +104,7 @@
         <p>DONE. Request is completed or incorrect</p>
         <p>CLICK to new request</p>
       </button>
-
     </section>
-
     <div class="modal js-modal">
       <div class="modal__overlay"></div>
       <div class="modal__content">
@@ -115,9 +119,6 @@
       <span class="material-icons">arrow_upward</span>
       to TOP
     </button>
-
-    
-    
     <script src="./index.js"></script>
   </body>
 </html>

@@ -35,8 +35,8 @@
 .search-btn {
   display: flex;
   align-items: center;
-  padding-left: 6px;
-  padding-right: 6px;
+  padding-left: 8px;
+  padding-right: 8px;
   border: solid 2px;
   border-left: solid 1px;
   outline: var(--main-color);
@@ -50,7 +50,7 @@
   align-items: center;
   border-radius: 6px;
   margin-left: 18px;
-  padding: 0px 12px 0px 12px;
+  padding: 0px 8px 0px 8px;
   font-weight: 600;
 }
 
@@ -123,10 +123,16 @@
   padding: 48px 0px 24px 0px;
 }
 
+.choice-option {
+  width: 240px;
+  // text-align: center;
+  padding-left: 30px;
+}
+
 .option-form {
-  padding: 0px 18px;
-  margin-top: 12px;
-  margin-bottom: 12px;
+  padding: 0px 16px;
+  margin-top: 8px;
+  margin-bottom: 8px;
   border: solid 1px;
   border-radius: 6px;
   background-color: var(--main-color);
