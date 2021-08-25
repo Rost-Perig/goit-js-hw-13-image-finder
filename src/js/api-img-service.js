@@ -1,3 +1,5 @@
+import axios from '../../node_modules/axios';
+
 export default class ImagesApiService {
     constructor() {
         this.searchQuery = '';
@@ -10,15 +12,24 @@ export default class ImagesApiService {
     
     fetchImages() {
         const url = `${this.BASE_URL}?image_type=${this.imgType}&orientation=${this.orientation}&page=${this.page}&per_page=12&key=${this.KEY}&q=${this.searchQuery}`;
-        return fetch(url)
-            .then(response => response.json())
-            .then(({hits}) => {
+// используя axios
+        return axios.get(url)
+            .then(({data}) => {
                 this.incrementPage();
-                // console.log(hits);
-                return hits;
+                return data.hits;
             }).catch(catchError => {
                 console.log(catchError);
             });
+// используя fetch        
+        // return fetch(url)
+        //     .then(response => response.json())
+        //     .then(({hits}) => {
+        //         this.incrementPage();
+        //         // console.log(hits);
+        //         return hits;
+        //     }).catch(catchError => {
+        //         console.log(catchError);
+        //     });
         }
 
     incrementPage() {
