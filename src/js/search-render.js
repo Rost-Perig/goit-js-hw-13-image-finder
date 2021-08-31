@@ -29,9 +29,17 @@ export function onSearch(e, ref, pNot) {
   clearFirstSearch(ref)
   return fetchAndRenderImages(ref, pNot);
 };
-
-export function fetchAndRenderImages(ref) {
-  imagesApiService.fetchImages().then(hits => {
+ 
+/* вариант используя async-away + try-catch, который применен для проверки успешного выполнения fetchImages*/
+export async function fetchAndRenderImages(ref) {
+  let hits;
+  try {
+    hits = await imagesApiService.fetchImages();
+  }
+  catch (error) {
+    console.log('Error: request failed');
+  };
+  
     if (hits === undefined || hits.length === 0) {
       clearIfAllDone(ref);
       return 
@@ -50,8 +58,31 @@ export function fetchAndRenderImages(ref) {
     }
     loadMoreBtn.enable();
     };
-  });
 };
+
+/*обычный вариант*/
+// export function fetchAndRenderImages(ref) {
+//   imagesApiService.fetchImages().then(hits => {
+//     if (hits === undefined || hits.length === 0) {
+//       clearIfAllDone(ref);
+//       return 
+//     };
+    
+//     if (ref.infiniteScrollOn === 'on') {
+//       ref.endedScroll = false;
+//       window.addEventListener("scroll", throttle(500, () => unlessScroll(refs, pN)));
+//       renderImgList(hits, ref);
+//     } else {
+//     loadMoreBtn.show();
+//     loadMoreBtn.disable();
+//     renderImgList(hits, ref);
+//     if (imagesApiService.page > 2) {
+//       scrollList(hits);
+//     }
+//     loadMoreBtn.enable();
+//     };
+//   });
+// };
 
 export function renderImgList(hits, {imgList, tempImgURLs}) {
   imgList.insertAdjacentHTML('beforeend', imgListTpl(hits));
