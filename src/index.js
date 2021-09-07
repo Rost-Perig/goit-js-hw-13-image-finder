@@ -1,14 +1,15 @@
 import { throttle } from 'throttle-debounce';
 import './sass/main.scss';
 import '@pnotify/core/dist/Angeler.css';
-import LoadMoreBtn from './js/load-more-btn';
 import { pN  } from './js/pnotify-set';
-import ImagesApiService from './js/api-img-service';
 import { onSearch, fetchAndRenderImages } from './js/search-render';
 import { toTop, scrollWatch, orientationValue, imgTypeValue, infiniteScrollValue, resetAll } from './js/utils';
 import { refs } from './js/refs';
 
+import ImagesApiService from './js/api-img-service';
 export const imagesApiService = new ImagesApiService;
+
+import LoadMoreBtn from './js/load-more-btn';
 export const loadMoreBtn = new LoadMoreBtn({
   selector: '[data-action="load-more"]',
   hidden: true,

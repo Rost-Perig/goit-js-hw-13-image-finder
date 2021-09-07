@@ -34,108 +34,109 @@ export default class ModalWindow {
     };
 
     /* ============остановка скролла под модальным окном============ */
+
     stopScroll() {
-    document.body.style.overflow = "hidden";
-    document.body.style.height = "100wh";
+        document.body.style.overflow = "hidden";
+        document.body.style.height = "100wh";
     };
 
     /* =========запуск скролла после закрытия модального окна========= */
 
     startScroll() {
-    document.body.style.overflow = "auto"; 
-    document.body.style.height = "auto";
+        document.body.style.overflow = "auto"; 
+        document.body.style.height = "auto";
     };
 
     /* =========создание массива ссылок на большие картинки========= */
 
     createTempImgUrls() {
-    this.tempModalImgUrls = [...document.querySelectorAll('.img-list-link')].map(el => el.parentNode.dataset.url);
-    };  
-        
+        this.tempModalImgUrls = [...document.querySelectorAll('.img-list-link')].map(el => el.parentNode.dataset.url);
+    };
+    
+    /* =========открытие-закрытие модального окна========= */
+    
     openModalOn() {
-    this.modal.classList.add('is-open');
-    this.modalImage.src = document.activeElement.parentNode.dataset.url;
+        this.modal.classList.add('is-open');
+        this.modalImage.src = document.activeElement.parentNode.dataset.url;
         this.stopScroll();
-    this.createTempImgUrls();    
+        this.createTempImgUrls();    
     };
 
-    /* =========открытие-закрытие модального окна========= */
-
     closeModalOn() {
-    this.modal.classList.remove('is-open');
-    this.modalImage.src = "";
-    this.startScroll();
-    this.tempModalImgUrls = null;
+        this.modal.classList.remove('is-open');
+        this.modalImage.src = "";
+        this.startScroll();
+        this.tempModalImgUrls = null;
     };
 
     onCloseModalOverlay(e) {
-    if (e.target === e.currentTarget) {
-        this.closeModalOn();
-    }
-        };
+        if (e.target === e.currentTarget) {
+            this.closeModalOn();
+        }
+    };
         
     /* =========== перелистывание картинок в модальном окне =========== */
 
     modalImageRight() {
-    const curImgIndex = this.tempModalImgUrls.indexOf(this.tempModalImgUrls.find(tempImgURL => tempImgURL === this.modalImage.src));
-    let nextImgIndex = 0;
+        const curImgIndex = this.tempModalImgUrls.indexOf(this.tempModalImgUrls.find(tempImgURL => tempImgURL === this.modalImage.src));
+        let nextImgIndex = 0;
 
-    curImgIndex === this.tempModalImgUrls.length - 1 ?
-        nextImgIndex = 0 :
-        nextImgIndex = curImgIndex + 1;
+        curImgIndex === this.tempModalImgUrls.length - 1 ?
+            nextImgIndex = 0 :
+            nextImgIndex = curImgIndex + 1;
 
-    this.modalImage.src = `${this.tempModalImgUrls[nextImgIndex]}`;
+        this.modalImage.src = `${this.tempModalImgUrls[nextImgIndex]}`;
     };
 
     modalImageLeft() {
-    const curImgIndex = this.tempModalImgUrls.indexOf(this.tempModalImgUrls.find(tempImgURL => tempImgURL === this.modalImage.src));
-    let previousImgIndex = 0;
+        const curImgIndex = this.tempModalImgUrls.indexOf(this.tempModalImgUrls.find(tempImgURL => tempImgURL === this.modalImage.src));
+        let previousImgIndex = 0;
 
-    curImgIndex === 0 ?
-        previousImgIndex = this.tempModalImgUrls.length - 1 :
-        previousImgIndex = curImgIndex - 1;
+        curImgIndex === 0 ?
+            previousImgIndex = this.tempModalImgUrls.length - 1 :
+            previousImgIndex = curImgIndex - 1;
 
-    this.modalImage.src = `${this.tempModalImgUrls[previousImgIndex]}`;
-    };
+        this.modalImage.src = `${this.tempModalImgUrls[previousImgIndex]}`;
+        };
 
     /* ========== перелистывание картинок в модальном окне клиом мыши ========== */
 
     onModalImageTurn() {
-    if (this.xMousePosition > (window.innerWidth / 2)) {
-        this.modalImageRight();
-    } else {
-        this.modalImageLeft();
-    };
+        if (this.xMousePosition > (window.innerWidth / 2)) {
+            this.modalImageRight();
+        } else {
+            this.modalImageLeft();
+        };
     };
 
     /* ================ события кнопок ================ */
 
     onKeyPress(e) {
-    if (e.code === "Enter" && document.activeElement.classList.contains("img-list-link")) {
-        e.preventDefault();
-        this.openModalOn();
-    };
+        if (e.code === "Enter" && document.activeElement.classList.contains("img-list-link")) {
+            e.preventDefault();
+            this.openModalOn();
+        };
 
-    let modalIsOpen = this.modal.classList.contains('is-open');
-    
-    if (modalIsOpen) {
-        switch (e.code) {
-        case "Escape": 
-        this.closeModalOn();
-        break;
+        let modalIsOpen = this.modal.classList.contains('is-open');
+        
+        if (modalIsOpen) {
+            switch (e.code) {
+            case "Escape": 
+            this.closeModalOn();
+            break;
 
-        case "ArrowRight":
-        this.modalImageRight();
-        break;
+            case "ArrowRight":
+            this.modalImageRight();
+            break;
 
-        case "ArrowLeft":
-        this.modalImageLeft();
-        break;
+            case "ArrowLeft":
+            this.modalImageLeft();
+            break;
 
-        default:
-        break;
-        }
-    };
+            default:
+            break;
+            }
+        };
     };
 };
     
