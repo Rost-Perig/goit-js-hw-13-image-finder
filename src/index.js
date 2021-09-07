@@ -17,7 +17,7 @@ export const loadMoreBtn = new LoadMoreBtn({
 
 import ModalWindow from './js/modal-service'; 
 const modalWind = new ModalWindow; 
-modalWind.createMarkupAndEvnListeners(refs);
+modalWind.createMarkupAndEvnListeners(refs.imgList);
 
 window.addEventListener('scroll', throttle(500, e => scrollWatch(refs)));
 refs.btnReset.addEventListener('click', () => resetAll(refs));

@@ -10,27 +10,28 @@ export default class ModalWindow {
         this.modalImage;
         this.tempModalImgUrls = null;
         this.xMousePosition = 0;
+        // this.imgList = document.querySelector('.img-list');
     };
     
     /* ============создание разметки и слушателя событий============ */
 
-    createMarkupAndEvnListeners(ref) {
+    createMarkupAndEvnListeners(listeningEl) {
         document.querySelector('script').insertAdjacentHTML("beforebegin", this.markupString);
         this.modal = document.querySelector('.js-modal');
         this.modalContent = document.querySelector('.modal__content');
         this.modalCloser = document.querySelector('button[data-action="close-modal"]');
         this.modalOverlay = document.querySelector('.modal__overlay');
         this.modalImage = document.querySelector('.img-card__image');
-        this.createAddEvtListenerModal(ref);
+        this.createAddEvtListenerModal(listeningEl);
     };
 
-    createAddEvtListenerModal({imgList}) {
+    createAddEvtListenerModal(listeningEl) {
         this.modalImage.addEventListener('click', () => this.onModalImageTurn());
         this.modalCloser.addEventListener('click', () => this.closeModalOn());
         this.modalOverlay.addEventListener('click', e => this.onCloseModalOverlay(e));
         this.modalImage.addEventListener('mousemove', throttle(500, e => this.xMousePosition = e.clientX));
         window.addEventListener('keydown', e => this.onKeyPress(e));
-        imgList.addEventListener('click', () => this.openModalOn());
+        listeningEl.addEventListener('click', () => this.openModalOn());
     };
 
     /* ============остановка скролла под модальным окном============ */
@@ -60,6 +61,16 @@ export default class ModalWindow {
         this.modalImage.src = document.activeElement.parentNode.dataset.url;
         this.stopScroll();
         this.createTempImgUrls();    
+    };
+
+    openModalClick(e) {
+        if (!e.target.classList.contains('main-img')) {
+            return
+        };
+        this.createTempImgUrls();
+        this.modal.classList.add('is-open');
+        this.modalImage.src = e.target.parentNode.parentNode.dataset.url;
+        this.stopScroll();
     };
 
     closeModalOn() {
