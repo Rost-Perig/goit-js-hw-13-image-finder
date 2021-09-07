@@ -20,6 +20,7 @@ const modalWind = new ModalWindow;
 modalWind.createMarkupAndEvnListeners(refs);
 
 window.addEventListener('scroll', throttle(500, e => scrollWatch(refs)));
+refs.btnReset.addEventListener('click', () => resetAll(refs));
 refs.doneBtn.addEventListener('click', () => resetAll(refs));
 refs.searchForm.addEventListener('submit', e => onSearch(e, refs, pN));
 loadMoreBtn.refs.button.addEventListener('click', () => fetchAndRenderImages(refs, pN));
