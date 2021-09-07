@@ -10,28 +10,29 @@ export default class ModalWindow {
         this.modalImage;
         this.tempModalImgUrls = null;
         this.xMousePosition = 0;
-        // this.imgList = document.querySelector('.img-list');
+        this.listeningEl;
     };
     
     /* ============создание разметки и слушателя событий============ */
 
-    createMarkupAndEvnListeners(listeningEl) {
+    createMarkupAndEvnListeners(listeningElClass) {
         document.querySelector('script').insertAdjacentHTML("beforebegin", this.markupString);
         this.modal = document.querySelector('.js-modal');
         this.modalContent = document.querySelector('.modal__content');
         this.modalCloser = document.querySelector('button[data-action="close-modal"]');
         this.modalOverlay = document.querySelector('.modal__overlay');
         this.modalImage = document.querySelector('.img-card__image');
-        this.createAddEvtListenerModal(listeningEl);
+        this.listeningEl = document.querySelector(`.${listeningElClass}`)
+        this.createAddEvtListenerModal();
     };
 
-    createAddEvtListenerModal(listeningEl) {
+    createAddEvtListenerModal() {
         this.modalImage.addEventListener('click', () => this.onModalImageTurn());
         this.modalCloser.addEventListener('click', () => this.closeModalOn());
         this.modalOverlay.addEventListener('click', e => this.onCloseModalOverlay(e));
         this.modalImage.addEventListener('mousemove', throttle(500, e => this.xMousePosition = e.clientX));
         window.addEventListener('keydown', e => this.onKeyPress(e));
-        listeningEl.addEventListener('click', () => this.openModalOn());
+        this.listeningEl.addEventListener('click', e => this.openModalClick(e));
     };
 
     /* ============остановка скролла под модальным окном============ */

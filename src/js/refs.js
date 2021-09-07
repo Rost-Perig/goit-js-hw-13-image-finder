@@ -4,7 +4,7 @@ export const refs = {
   input: document.querySelector('[name="query"]'),
   btnReset: document.querySelector('[data-action="reset"]'),
   currentSearchQuery: '',
-  imgList: document.querySelector('.img-list'),
+  imgList: document.querySelector('.js-img-list'),
   pnotifyOverlay: document.querySelector('.pnotify-overlay'),
   toTopBtn: document.querySelector('[data-action="to-top"]'),
   formOrientation: document.querySelector('.js-orientation'),
