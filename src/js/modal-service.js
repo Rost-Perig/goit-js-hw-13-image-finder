@@ -1,5 +1,3 @@
-import { throttle } from '../../node_modules/throttle-debounce';
-
 export default class ModalWindow {
     constructor() {
         this.markupString = '<div class="modal js-modal"><div div class="modal__overlay"></div ><div class="modal__content"><div class="img-card"><img src="" alt="" class="img-card__image"/></div></div><button type="button" class="modal__button" data-action="close-modal"></button></div > ';
@@ -9,7 +7,6 @@ export default class ModalWindow {
         this.modalOverlay;
         this.modalImage;
         this.tempModalImgUrls = null;
-        this.xMousePosition = 0;
         this.listeningEl;
     };
     
@@ -27,10 +24,9 @@ export default class ModalWindow {
     };
 
     createAddEvtListenerModal() {
-        this.modalImage.addEventListener('click', () => this.onModalImageTurn());
+        this.modalImage.addEventListener('click', e => this.onModalImageTurn(e));
         this.modalCloser.addEventListener('click', () => this.closeModalOn());
         this.modalOverlay.addEventListener('click', e => this.onCloseModalOverlay(e));
-        this.modalImage.addEventListener('mousemove', throttle(500, e => this.xMousePosition = e.clientX));
         window.addEventListener('keydown', e => this.onKeyPress(e));
         this.listeningEl.addEventListener('click', e => this.openModalClick(e));
     };
@@ -88,37 +84,31 @@ export default class ModalWindow {
     };
         
     /* =========== перелистывание картинок в модальном окне =========== */
-
-    modalImageRight() {
+    modalImageRun(direction) {
         const curImgIndex = this.tempModalImgUrls.indexOf(this.tempModalImgUrls.find(tempImgURL => tempImgURL === this.modalImage.src));
         let nextImgIndex = 0;
 
-        curImgIndex === this.tempModalImgUrls.length - 1 ?
+        if (direction === 'right') {
+           curImgIndex === this.tempModalImgUrls.length - 1 ?
             nextImgIndex = 0 :
-            nextImgIndex = curImgIndex + 1;
+            nextImgIndex = curImgIndex + 1; 
+        } else {
+            curImgIndex === 0 ?
+            nextImgIndex = this.tempModalImgUrls.length - 1 :
+            nextImgIndex = curImgIndex - 1;
+        };
 
         this.modalImage.src = `${this.tempModalImgUrls[nextImgIndex]}`;
     };
 
-    modalImageLeft() {
-        const curImgIndex = this.tempModalImgUrls.indexOf(this.tempModalImgUrls.find(tempImgURL => tempImgURL === this.modalImage.src));
-        let previousImgIndex = 0;
-
-        curImgIndex === 0 ?
-            previousImgIndex = this.tempModalImgUrls.length - 1 :
-            previousImgIndex = curImgIndex - 1;
-
-        this.modalImage.src = `${this.tempModalImgUrls[previousImgIndex]}`;
-        };
-
     /* ========== перелистывание картинок в модальном окне клиом мыши ========== */
 
-    onModalImageTurn() {
-        if (this.xMousePosition > (window.innerWidth / 2)) {
-            this.modalImageRight();
-        } else {
-            this.modalImageLeft();
-        };
+    onModalImageTurn(e) {
+        let direction = '';
+        e.clientX > (window.innerWidth / 2) || e.code === "ArrowRight" ?
+            direction = 'right' :
+            direction = 'left';
+        this.modalImageRun(direction);
     };
 
     /* ================ события кнопок ================ */
@@ -138,11 +128,11 @@ export default class ModalWindow {
             break;
 
             case "ArrowRight":
-            this.modalImageRight();
+            this.onModalImageTurn(e);
             break;
 
             case "ArrowLeft":
-            this.modalImageLeft();
+            this.onModalImageTurn(e);
             break;
 
             default:
