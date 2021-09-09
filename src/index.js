@@ -15,8 +15,7 @@ export const loadMoreBtn = new LoadMoreBtn({
   hidden: true,
 });
 
-import ModalWindow from './js/modal-service'; 
-const modalWind = new ModalWindow; 
+import modalWind from './js/modal-service'; 
 modalWind.createMarkupAndEvnListeners('js-img-list');
 
 window.addEventListener('scroll', throttle(500, e => scrollWatch(refs)));

@@ -1,4 +1,4 @@
-export default class ModalWindow {
+class ModalWindow {
     constructor() {
         this.markupString = '<div class="modal js-modal"><div div class="modal__overlay"></div ><div class="modal__content"><div class="img-card"><img src="" alt="" class="img-card__image"/></div></div><button type="button" class="modal__button" data-action="close-modal"></button></div > ';
         this.modal;
@@ -141,4 +141,5 @@ export default class ModalWindow {
         };
     };
 };
-    
+
+export default new ModalWindow;
